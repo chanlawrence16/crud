@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: crud
+  profiles:
+    active: ${PROFILE:dev}
+
+server:
+  port: ${PORT:8080}
