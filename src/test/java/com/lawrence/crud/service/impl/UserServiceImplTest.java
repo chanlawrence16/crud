@@ -44,8 +44,17 @@ public class UserServiceImplTest {
         User result = userService.findUserById(1);
 
         assertEquals("test", result.getUsername());
-
     }
 
+    @Test
+    void createUser() {
+        User user = new User();
+        user.setUsername("lawrence");
+
+        when(userRepository.save(user)).thenReturn(user);
+        User result = userService.createUser(user);
+
+        assertEquals("lawrence", result.getUsername());
+    }
 
 }

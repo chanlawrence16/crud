@@ -6,6 +6,7 @@ import com.lawrence.crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,7 +23,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    @Override
     public User findUserById(Integer id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public User createUser(User user) {
+        user.setCreatedDate(LocalDateTime.now());
+        return userRepository.save(user);
     }
 }
