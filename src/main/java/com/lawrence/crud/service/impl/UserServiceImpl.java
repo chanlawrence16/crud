@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    public User findUserById(Integer id){
+    public User findUserById(Integer id) {
         return userRepository.findById(id).orElse(null);
     }
 }
