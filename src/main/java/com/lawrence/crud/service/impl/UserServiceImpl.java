@@ -33,4 +33,8 @@ public class UserServiceImpl implements UserService {
         user.setCreatedDate(LocalDateTime.now());
         return userRepository.save(user);
     }
+
+    public void deleteUserById(Integer id) {
+        userRepository.deleteById(id);
+    }
 }

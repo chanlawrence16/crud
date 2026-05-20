@@ -2,6 +2,7 @@ package com.lawrence.crud.controller;
 
 import com.lawrence.crud.entity.User;
 import com.lawrence.crud.service.UserService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,10 @@ public class UserController {
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUserById(@PathVariable Integer id) {
+        userService.deleteUserById(id);
     }
 }

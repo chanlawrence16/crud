@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
@@ -55,6 +55,17 @@ public class UserServiceImplTest {
         User result = userService.createUser(user);
 
         assertEquals("lawrence", result.getUsername());
+    }
+
+    @Test
+    void deleteUserById() {
+        User user = new User();
+        user.setId(4);
+
+        doNothing().when(userRepository).deleteById(4);
+        userService.deleteUserById(4);
+
+        verify(userRepository).deleteById(4);
     }
 
 }
