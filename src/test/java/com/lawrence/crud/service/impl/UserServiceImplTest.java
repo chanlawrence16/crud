@@ -47,7 +47,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void testcreateUser() {
+    void testCreateUser() {
         User user = new User();
         user.setUsername("lawrence");
 
@@ -58,7 +58,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void testdeleteUserById() {
+    void testDeleteUserById() {
         User user = new User();
         user.setId(4);
 
@@ -69,7 +69,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void testupdateUser() {
+    void testUpdateUser() {
         User existingUser = new User();
         existingUser.setId(5);
         existingUser.setUsername("oldUser");
