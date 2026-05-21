@@ -47,7 +47,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void createUser() {
+    void testcreateUser() {
         User user = new User();
         user.setUsername("lawrence");
 
@@ -58,7 +58,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void deleteUserById() {
+    void testdeleteUserById() {
         User user = new User();
         user.setId(4);
 
@@ -66,6 +66,24 @@ public class UserServiceImplTest {
         userService.deleteUserById(4);
 
         verify(userRepository).deleteById(4);
+    }
+
+    @Test
+    void testupdateUser() {
+        User existingUser = new User();
+        existingUser.setId(5);
+        existingUser.setUsername("oldUser");
+
+        when(userRepository.findById(5)).thenReturn(Optional.of(existingUser));
+        when(userRepository.save(existingUser)).thenReturn(existingUser);
+
+        User newUser = new User();
+        newUser.setUsername("newUser");
+
+        User result = userService.updateUser(5, newUser);
+
+        assertEquals("newUser", result.getUsername());
+
     }
 
 }
