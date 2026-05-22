@@ -2,9 +2,7 @@ package com.lawrence.crud.controller;
 
 import com.lawrence.crud.dto.UserRequest;
 import com.lawrence.crud.dto.UserResponse;
-import com.lawrence.crud.entity.User;
 import com.lawrence.crud.service.UserService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserResponse findByUserID(@PathVariable Integer id) {
+    public UserResponse findUserById(@PathVariable Integer id) {
         return userService.findUserById(id);
     }
 
