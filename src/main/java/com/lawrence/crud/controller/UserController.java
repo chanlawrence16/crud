@@ -1,5 +1,7 @@
 package com.lawrence.crud.controller;
 
+import com.lawrence.crud.dto.UserRequest;
+import com.lawrence.crud.dto.UserResponse;
 import com.lawrence.crud.entity.User;
 import com.lawrence.crud.service.UserService;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -20,19 +22,19 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAllUsers() {
-        List<User> users = userService.findAllUsers();
+    public ResponseEntity<List<UserResponse>> findAllUsers() {
+        List<UserResponse> users = userService.findAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public User findByUserID(@PathVariable Integer id) {
+    public UserResponse findByUserID(@PathVariable Integer id) {
         return userService.findUserById(id);
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public UserResponse createUser(@RequestBody UserRequest request) {
+        return userService.createUser(request);
     }
 
     @DeleteMapping("/{id}")
@@ -41,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Integer id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+    public UserResponse updateUser(@PathVariable Integer id, @RequestBody UserRequest request) {
+        return userService.updateUser(id, request);
     }
 }

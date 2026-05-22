@@ -1,9 +1,11 @@
 package com.lawrence.crud.service.impl;
 
 import com.github.javafaker.Faker;
-import com.lawrence.crud.entity.User;
+import com.lawrence.crud.dto.UserRequest;
+import com.lawrence.crud.dto.UserResponse;
 import com.lawrence.crud.repository.UserRepository;
 import com.lawrence.crud.service.UserService;
+import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +31,12 @@ class UserServiceIntegrationTest {
     @Test
     void shouldCreateUser() {
         //Arrange
-        User user = new User();
+        UserRequest user = new UserRequest();
         String username = faker.name().username();
         user.setUsername(username);
         //Act
-        User result = userService.createUser(user);
+
+        UserResponse result = userService.createUser(user);
         //Assert
         Assertions.assertThat(result).isNotNull();
         Assertions.assertThat(result.getId()).isNotNull();
@@ -43,13 +46,13 @@ class UserServiceIntegrationTest {
     @Test
     void shouldGetUserWhenIdIsValid() {
         //Arrange
-        User user = new User();
+        UserRequest user = new UserRequest();
         String username = faker.name().username();
         user.setUsername(username);
-        User createdUser = userService.createUser(user);
+        UserResponse createdUser = userService.createUser(user);
         //Act
         Integer createdUserId = createdUser.getId();
-        User result = userService.findUserById(createdUserId);
+        UserResponse result = userService.findUserById(createdUserId);
         //Assert
         Assertions.assertThat(result).isNotNull();
         Assertions.assertThat(result.getId()).isNotNull();
@@ -60,16 +63,16 @@ class UserServiceIntegrationTest {
     @Test
     void shouldUpdateUserUsername() {
         //Arrange
-        User user = new User();
+        UserRequest user = new UserRequest();
         String username = faker.name().username();
         user.setUsername(username);
-        User createdUser = userService.createUser(user);
+        UserResponse createdUser = userService.createUser(user);
         //Act
         Integer createdUserId = createdUser.getId();
-        User toBeUpdatedUser = new User();
+        UserRequest toBeUpdatedUser = new UserRequest();
         String newUsername = faker.name().username();
         toBeUpdatedUser.setUsername(newUsername);
-        User result = userService.updateUser(createdUserId, toBeUpdatedUser);
+        UserResponse result = userService.updateUser(createdUserId, toBeUpdatedUser);
         //Assert
         Assertions.assertThat(result).isNotNull();
         Assertions.assertThat(result.getUsername()).isEqualToIgnoringCase(newUsername);
@@ -78,13 +81,13 @@ class UserServiceIntegrationTest {
     @Test
     void shouldDeleteUser() {
         //Arrange
-        User user = new User();
+        UserRequest user = new UserRequest();
         String username = faker.name().username();
         user.setUsername(username);
-        User createdUser = userService.createUser(user);
+        UserResponse createdUser = userService.createUser(user);
         //Act
         userService.deleteUserById(createdUser.getId());
-        User result = userService.findUserById(createdUser.getId());
+        UserResponse result = userService.findUserById(createdUser.getId());
         //Assert
         Assertions.assertThat(result).isNull();
     }
@@ -95,13 +98,13 @@ class UserServiceIntegrationTest {
         userRepository.deleteAll();
         int count = 5;
         for (int i = 0; i < count; i++) {
-            User user = new User();
+            UserRequest user = new UserRequest();
             String username = faker.name().username();
             user.setUsername(username);
             userService.createUser(user);
         }
         //Act
-        List<User> result = userService.findAllUsers();
+        List<UserResponse> result = userService.findAllUsers();
         //Assert
         Assertions.assertThat(result.size()).isEqualTo(count);
 

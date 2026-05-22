@@ -1,17 +1,18 @@
 package com.lawrence.crud.service;
 
-import com.lawrence.crud.entity.User;
+import com.lawrence.crud.dto.UserRequest;
+import com.lawrence.crud.dto.UserResponse;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> findAllUsers();
+    List<UserResponse> findAllUsers();
 
-    User findUserById(Integer id);
+    UserResponse findUserById(Integer id);
 
-    User createUser(User user);
+    UserResponse createUser(UserRequest request);
 
     void deleteUserById(Integer id);
 
-    User updateUser(Integer id, User user);
+    UserResponse updateUser(Integer id, UserRequest request);
 }
