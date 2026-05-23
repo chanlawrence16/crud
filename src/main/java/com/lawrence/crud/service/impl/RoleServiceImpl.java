@@ -8,6 +8,7 @@ import com.lawrence.crud.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,12 @@ public class RoleServiceImpl implements RoleService {
             RoleResponse response = roleMapper.fromEntityToResponse(role);
             return response;
         }
+    }
+
+    @Override
+    public List<RoleResponse> findAllRoles() {
+        List<Role> roleList = roleRepository.findAll();
+        List<RoleResponse> roleResponseList = roleMapper.fromEntitiesToReponses(roleList);
+        return roleResponseList;
     }
 }
